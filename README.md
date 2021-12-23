@@ -2,6 +2,8 @@
 
 # Project Description:
 
+Web service with social network elements. An option to update user info and avatar picture, publish and delete created cards, view images in enlarged format. Also, there are an option to add or remove "like" mark.
+
 The main focus of this project is implimenting basic Javascript functions for form input and form button manipulation.
 
 ### Github-pages project:
