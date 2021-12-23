@@ -8,7 +8,7 @@ The main focus of this project is implimenting basic Javascript functions for fo
 
 
 
-[Link to project on github-pages]()
+[Link to project on github-pages](https://pavel-lantsman.github.io/web_project_4/)
 
 Tools Used:
 * JavaScript
