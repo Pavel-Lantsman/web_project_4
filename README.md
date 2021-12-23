@@ -8,7 +8,7 @@ The main focus of this project is implimenting basic Javascript functions for fo
 
 
 
-[Link to project on github-pages](https://saraw011.github.io/Project-4-Around-the-US/)
+[Link to project on github-pages]()
 
 Tools Used:
 * JavaScript
