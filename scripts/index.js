@@ -11,16 +11,17 @@ const userNameElement = document.querySelector('.profile__name')
 const userJobElement = document.querySelector('.profile__title')
 
 
-function closeModal() {
-    modal.classList.remove('modal_opened')
+function visibilityModal() {
+    modalDefaultInfo()
+    modal.classList.toggle('modal_opened')
 }
 
-function openModal() {
+
+function modalDefaultInfo() {
     const userName = userNameElement.textContent
     const userJob = userJobElement.textContent
     inputName.value = userName
     inputJob.value = userJob
-    modal.classList.add('modal_opened')
 }
 
 function handleSubmit(e) {
@@ -29,9 +30,9 @@ function handleSubmit(e) {
     const jobValue = inputJob.value
     userNameElement.textContent = nameValue
     userJobElement.textContent = jobValue
-    closeModal()
+    visibilityModal()
 }
 
 form.addEventListener('submit', handleSubmit);
-openButton.addEventListener('click', openModal)
-closeButton.addEventListener('click', closeModal)
+openButton.addEventListener('click', visibilityModal)
+closeButton.addEventListener('click', visibilityModal)
