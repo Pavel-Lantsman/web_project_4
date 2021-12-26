@@ -1,12 +1,14 @@
 .elements__heart {
-    height: 19px;
-    width: 21px;
+    min-height: 19px;
+    min-width: 21px;
     align-self: center;
     padding: 0;
     border: none;
-    background: none;
     cursor: pointer;
     transition: 1s ease-out;
+    background: none;
+    background-image: url("/images/heart.svg");
+    background-repeat: no-repeat;
 }
 
 .elements__heart:hover {
