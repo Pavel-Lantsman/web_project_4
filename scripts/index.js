@@ -18,10 +18,8 @@ function visibilityModal() {
 
 
 function modalDefaultInfo() {
-    const userName = userNameElement.textContent
-    const userJob = userJobElement.textContent
-    inputName.value = userName
-    inputJob.value = userJob
+    inputName.value = userNameElement.textContent
+    inputJob.value = userJobElement.textContent
 }
 
 function handleSubmit(e) {
