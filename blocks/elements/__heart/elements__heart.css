@@ -7,7 +7,7 @@
     cursor: pointer;
     transition: 1s ease-out;
     background: none;
-    background-image: url("/images/heart.svg");
+    background-image: url("../../../images/heart.svg");
     background-repeat: no-repeat;
 }
 
