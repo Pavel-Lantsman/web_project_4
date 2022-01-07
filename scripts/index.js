@@ -5,7 +5,7 @@ const previewImage = document.querySelector(".modal_type_preview-image");
 
 //wrapper for popup forms
 const profileForm = editProfilePopup.querySelector(".form");
-const placeForm = addNewPlacePopup.querySelector(".form__add-place");
+const placeForm = addNewPlacePopup.querySelector(".form-add-place");
 
 //select profile name and info:
 const userNameElement = document.querySelector(".profile__name");
