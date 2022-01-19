@@ -26,11 +26,15 @@ const addNewPlacePopupButton = document.querySelector(".profile__add-button");
 const placeList = document.querySelector(".elements__list");
 const placeTemplate = document.querySelector(".elements-template").content.querySelector(".elements__element");
 
+const modalImageCaption = previewImage.querySelector(".modal__image-caption");
+const modalImageContainer = previewImage.querySelector(".modal__image-container");
+
 
 function createPlaceElement(data) {
     const place = placeTemplate.cloneNode(true);
+    const cardImage = place.querySelector(".elements__image");
     place.querySelector(".elements__text").textContent = data.name;
-    place.querySelector(".elements__image").style.backgroundImage = `url(${data.link})`;
+    cardImage.style.backgroundImage = `url(${data.link})`;
 
     place.querySelector(".elements__heart").addEventListener("click", (evt) => {
         evt.target.classList.toggle("elements__heart_active");
@@ -40,12 +44,10 @@ function createPlaceElement(data) {
         place.remove();
     });
 
-    place.querySelector(".elements__image").addEventListener("click", () => {
-        previewImage.querySelector(".modal__image-caption").textContent =
-            data.name;
-        previewImage.querySelector(".modal__image-container").src =
-            data.link;
-        visibilityModal(previewImage);
+    cardImage.addEventListener("click", () => {
+        modalImageCaption.textContent = data.name;
+        modalImageContainer.src = data.link;
+        toggleModal(previewImage);
     });
     return place;
 }
@@ -59,7 +61,7 @@ function submitProfileForm(e) {
     e.preventDefault();
     userNameElement.textContent = inputName.value;
     userJobElement.textContent = inputJob.value;
-    visibilityModal(editProfilePopup)
+    toggleModal(editProfilePopup)
 }
 
 function submitNewPlaceForm(e) {
@@ -69,30 +71,33 @@ function submitNewPlaceForm(e) {
         link: inputLink.value,
     });
     placeList.prepend(insertPlace);
-    visibilityModal(addNewPlacePopup);
+    toggleModal(addNewPlacePopup);
 }
 
-function visibilityModal(popup) {
-    modalDefaultInfo()
-    popup.classList.toggle('modal_opened')
+function toggleModal(popup) {
+    popup.classList.toggle('modal_opened');
 }
 
 function modalDefaultInfo() {
-    inputName.value = userNameElement.textContent
-    inputJob.value = userJobElement.textContent
+    inputName.value = userNameElement.textContent;
+    inputJob.value = userJobElement.textContent;
+    inputPlace.value = "";
+    inputLink.value = "";
 }
 
 const closeAllBtns = document.querySelectorAll(".modal__close-button");
 closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
-    visibilityModal(evt.target.closest('.modal'))
+    toggleModal(evt.target.closest('.modal'))
 }));
 
 
 profileForm.addEventListener("submit", submitProfileForm);
 placeForm.addEventListener("submit", submitNewPlaceForm);
 
-openProfileEditButton.addEventListener("click", () => visibilityModal(editProfilePopup));
-addNewPlacePopupButton.addEventListener("click", () =>
-    visibilityModal(addNewPlacePopup));
+openProfileEditButton.addEventListener("click",() => modalDefaultInfo());
+openProfileEditButton.addEventListener("click",() => toggleModal(editProfilePopup));
+
+addNewPlacePopupButton.addEventListener("click",() => modalDefaultInfo());
+addNewPlacePopupButton.addEventListener("click",() => toggleModal(addNewPlacePopup));
 
 
