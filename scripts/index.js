@@ -47,6 +47,7 @@ function createPlaceElement(data) {
     cardImage.addEventListener("click", () => {
         modalImageCaption.textContent = data.name;
         modalImageContainer.src = data.link;
+        modalImageContainer.alt = data.name;
         toggleModal(previewImage);
     });
     return place;
@@ -78,13 +79,6 @@ function toggleModal(popup) {
     popup.classList.toggle('modal_opened');
 }
 
-function modalDefaultInfo() {
-    inputName.value = userNameElement.textContent;
-    inputJob.value = userJobElement.textContent;
-    inputPlace.value = "";
-    inputLink.value = "";
-}
-
 const closeAllBtns = document.querySelectorAll(".modal__close-button");
 closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
     toggleModal(evt.target.closest('.modal'))
@@ -94,10 +88,19 @@ closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
 profileForm.addEventListener("submit", submitProfileForm);
 placeForm.addEventListener("submit", submitNewPlaceForm);
 
-openProfileEditButton.addEventListener("click",() => modalDefaultInfo());
-openProfileEditButton.addEventListener("click",() => toggleModal(editProfilePopup));
 
-addNewPlacePopupButton.addEventListener("click",() => modalDefaultInfo());
-addNewPlacePopupButton.addEventListener("click",() => toggleModal(addNewPlacePopup));
+openProfileEditButton.addEventListener("click",() => {
+    inputName.value = userNameElement.textContent;
+    inputJob.value = userJobElement.textContent;
+    toggleModal(editProfilePopup)
+});
+
+addNewPlacePopupButton.addEventListener("click",() => {
+    inputPlace.value = "";
+    inputLink.value = "";
+    toggleModal(addNewPlacePopup)
+});
+
+
 
 
