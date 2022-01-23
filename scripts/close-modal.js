@@ -1,18 +1,18 @@
 
 function closePopupWithEscape(event) {
   const key = event.key;
-  if (key == "Escape") {
-    closeModal(document.querySelector(".modal_open"));
+  if (key === "Escape") {
+    toggleModal(document.querySelector(".modal_opened"));
   }
 }
 
 
 function closePopupOverlayClickOut(event) {
   if (
-    event.target.classList.contains("modal_open") ||
-    event.target.classList.contains(`modal__image-wrapper`)
+    event.target.classList.contains("modal_opened") ||
+    event.target.classList.contains("modal__image-wrapper")
   ) {
-    closeModal(event.target);
+    toggleModal(event.target);
   }
 }
 

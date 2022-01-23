@@ -51,7 +51,7 @@
 
 /*form*/
 @import url(../blocks/form/form.css);
-/*elements*/
+/*elements and modifier*/
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type_error/form__input_type_error.css);
 @import url(../blocks/form/__button/form__button.css);

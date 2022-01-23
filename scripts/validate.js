@@ -96,3 +96,4 @@ function enableValidation(settings) {
 
 
 enableValidation(fieldset);
+
