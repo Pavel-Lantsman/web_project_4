@@ -62,7 +62,9 @@ function submitProfileForm(e) {
     e.preventDefault();
     userNameElement.textContent = inputName.value;
     userJobElement.textContent = inputJob.value;
-    toggleModal(editProfilePopup)
+    toggleModal(editProfilePopup);
+    document.removeEventListener("keydown", closePopupWithEscape);
+    document.removeEventListener("click", closePopupOverlayClickOut);
 }
 
 function submitNewPlaceForm(e) {
@@ -73,6 +75,8 @@ function submitNewPlaceForm(e) {
     });
     placeList.prepend(insertPlace);
     toggleModal(addNewPlacePopup);
+    document.removeEventListener("keydown", closePopupWithEscape);
+    document.removeEventListener("click", closePopupOverlayClickOut);
 }
 
 function toggleModal(popup) {
@@ -92,13 +96,17 @@ placeForm.addEventListener("submit", submitNewPlaceForm);
 openProfileEditButton.addEventListener("click",() => {
     inputName.value = userNameElement.textContent;
     inputJob.value = userJobElement.textContent;
-    toggleModal(editProfilePopup)
+    toggleModal(editProfilePopup);
+    document.addEventListener("keydown", closePopupWithEscape);
+    document.addEventListener("click", closePopupOverlayClickOut);
 });
 
 addNewPlacePopupButton.addEventListener("click",() => {
     inputPlace.value = "";
     inputLink.value = "";
-    toggleModal(addNewPlacePopup)
+    toggleModal(addNewPlacePopup);
+    document.addEventListener("keydown", closePopupWithEscape);
+    document.addEventListener("click", closePopupOverlayClickOut);
 });
 
 
