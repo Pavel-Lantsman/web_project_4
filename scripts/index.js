@@ -48,7 +48,7 @@ function createPlaceElement(data) {
         modalImageCaption.textContent = data.name;
         modalImageContainer.src = data.link;
         modalImageContainer.alt = data.name;
-        toggleModal(previewImage);
+        openModal(previewImage);
     });
     return place;
 }
@@ -62,9 +62,7 @@ function submitProfileForm(e) {
     e.preventDefault();
     userNameElement.textContent = inputName.value;
     userJobElement.textContent = inputJob.value;
-    toggleModal(editProfilePopup);
-    document.removeEventListener("keydown", closePopupWithEscape);
-    document.removeEventListener("click", closePopupOverlayClickOut);
+    closeModal(editProfilePopup);
 }
 
 function submitNewPlaceForm(e) {
@@ -74,9 +72,7 @@ function submitNewPlaceForm(e) {
         link: inputLink.value,
     });
     placeList.prepend(insertPlace);
-    toggleModal(addNewPlacePopup);
-    document.removeEventListener("keydown", closePopupWithEscape);
-    document.removeEventListener("click", closePopupOverlayClickOut);
+    closeModal(addNewPlacePopup);
 }
 
 function toggleModal(popup) {
@@ -85,7 +81,7 @@ function toggleModal(popup) {
 
 const closeAllBtns = document.querySelectorAll(".modal__close-button");
 closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
-    toggleModal(evt.target.closest('.modal'))
+    closeModal(evt.target.closest('.modal'))
 }));
 
 
@@ -96,17 +92,15 @@ placeForm.addEventListener("submit", submitNewPlaceForm);
 openProfileEditButton.addEventListener("click",() => {
     inputName.value = userNameElement.textContent;
     inputJob.value = userJobElement.textContent;
-    toggleModal(editProfilePopup);
-    document.addEventListener("keydown", closePopupWithEscape);
-    document.addEventListener("click", closePopupOverlayClickOut);
+    editProfilePopup.querySelector(".form__button").disabled = true;
+    openModal(editProfilePopup);
 });
 
 addNewPlacePopupButton.addEventListener("click",() => {
     inputPlace.value = "";
     inputLink.value = "";
-    toggleModal(addNewPlacePopup);
-    document.addEventListener("keydown", closePopupWithEscape);
-    document.addEventListener("click", closePopupOverlayClickOut);
+    addNewPlacePopup.querySelector(".form__button").disabled = true;
+    openModal(addNewPlacePopup);
 });
 
 

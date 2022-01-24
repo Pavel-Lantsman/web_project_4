@@ -47,10 +47,12 @@ function toggleButtonState(inputList, buttonElement, settings) {
     (inputElement) => !inputElement.validity.valid
   );
 
-  if (hasInvalidInput) {
+  if (hasInvalidInput){
     buttonElement.classList.add(settings.inactiveButtonClass);
-  } else {
+    buttonElement.disabled = true;
+  }  else  {
     buttonElement.classList.remove(settings.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 }
 
@@ -63,6 +65,7 @@ function setEventListeners(formElement, settings) {
   const buttonElement = formElement.querySelector(
     settings.submitButtonSelector
   );
+
 
   // call to check the button state in the very beginning
   toggleButtonState(inputList, buttonElement, settings);
