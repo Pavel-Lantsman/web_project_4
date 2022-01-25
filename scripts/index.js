@@ -63,6 +63,8 @@ function submitProfileForm(e) {
     userNameElement.textContent = inputName.value;
     userJobElement.textContent = inputJob.value;
     closeModal(editProfilePopup);
+    editProfilePopup.querySelector(".form__button").disabled = true;
+    editProfilePopup.querySelector(".form__button").classList.add("form__button_disabled");
 }
 
 function submitNewPlaceForm(e) {
@@ -73,11 +75,12 @@ function submitNewPlaceForm(e) {
     });
     placeList.prepend(insertPlace);
     closeModal(addNewPlacePopup);
+    inputPlace.value = "";
+    inputLink.value = "";
+    addNewPlacePopup.querySelector(".form__button").disabled = true;
+    addNewPlacePopup.querySelector(".form__button").classList.add("form__button_disabled");
 }
 
-function toggleModal(popup) {
-    popup.classList.toggle('modal_opened');
-}
 
 const closeAllBtns = document.querySelectorAll(".modal__close-button");
 closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
@@ -92,14 +95,10 @@ placeForm.addEventListener("submit", submitNewPlaceForm);
 openProfileEditButton.addEventListener("click",() => {
     inputName.value = userNameElement.textContent;
     inputJob.value = userJobElement.textContent;
-    editProfilePopup.querySelector(".form__button").disabled = true;
     openModal(editProfilePopup);
 });
 
 addNewPlacePopupButton.addEventListener("click",() => {
-    inputPlace.value = "";
-    inputLink.value = "";
-    addNewPlacePopup.querySelector(".form__button").disabled = true;
     openModal(addNewPlacePopup);
 });
 
