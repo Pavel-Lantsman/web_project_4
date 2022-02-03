@@ -1,4 +1,4 @@
-import initialCards from "./initial-cards.js";
+import initialCards from "./initialCards.js";
 import FormValidator from "./FormValidator";
 import Card from "./Card.js";
 import { openModal, closeModal } from "./utils.js";
@@ -6,7 +6,7 @@ import { openModal, closeModal } from "./utils.js";
 //wrapper modals
 const editProfilePopup = document.querySelector(".modal_type_edit-profile");
 const addNewPlacePopup = document.querySelector(".modal_type_add-place");
-const previewImage = document.querySelector(".modal_type_preview-image");
+// const previewImage = document.querySelector(".modal_type_preview-image");
 
 //wrapper for popup forms
 const profileForm = editProfilePopup.querySelector(".form");
@@ -29,10 +29,13 @@ const addNewPlacePopupButton = document.querySelector(".profile__add-button");
 
 //place=elements template
 const placeList = document.querySelector(".elements__list");
-const placeTemplate = document.querySelector(".elements-template").content.querySelector(".elements__element");
+const placeTemplate = document.querySelector(".elements-template")
+    .content;
+// const placeTemplate = document.querySelector(".elements-template")
+//     .content.querySelector(".elements__element");
 
-// const modalImageCaption = previewImage.querySelector(".modal__image-caption");
-// const modalImageContainer = previewImage.querySelector(".modal__image-container");
+const modalImageCaption = previewImage.querySelector(".modal__image-caption");
+const modalImageContainer = previewImage.querySelector(".modal__image-container");
 
 
 initialCards.reverse().forEach((initialCardData) => {
@@ -59,10 +62,10 @@ function disableButton(button) {
 
 function submitNewPlaceForm(e) {
     e.preventDefault();
-    const insertPlace = createPlaceElement({
+    const insertPlace = {
         name: inputPlace.value,
         link: inputLink.value,
-    });
+    };
     renderCard(insertPlace);
     closeModal(addNewPlacePopup);
     e.target.reset();

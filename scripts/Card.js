@@ -29,7 +29,6 @@ export default class Card {
 
         this._image.querySelector(".modal__image-caption").textContent = this._name;
 
-        //select the DOM element once and reuse it:
         const imagePreview = document.querySelector(".modal__image-container");
         imagePreview.src = this._link;
         imagePreview.alt = this._name;
