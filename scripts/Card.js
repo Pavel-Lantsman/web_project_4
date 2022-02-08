@@ -8,22 +8,28 @@ export default class Card {
   }
 
   _getTemplate() {
-    return this._template
+    // const placeTemplate = document.querySelector(".elements-template")
+    // .content;
+    return document.querySelector(".elements-template")
+        .content
+        .querySelector(this._template)
         .cloneNode(true);
   }
 
-  _handleLikeImage() {
+
+  _handleLikeImage = () => {
     this._cardElement
       .querySelector(".elements__heart")
       .classList.toggle("elements__heart_active");
   }
 
-  _handleDeleteCard() {
+
+  _handleDeleteCard = () => {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
-  _handlePreviewImage() {
+  _handlePreviewImage = () => {
     this._image = document.querySelector(".modal_type_preview-image");
     this._image.querySelector(".modal__image-caption").textContent = this._name;
 
@@ -37,21 +43,15 @@ export default class Card {
   _addEventListeners() {
     this._cardElement
       .querySelector(".elements__heart")
-      .addEventListener("click", () => {
-        this._handleLikeImage();
-      });
+      .addEventListener("click", this._handleLikeImage);
 
     this._cardElement
       .querySelector(".elements__trash")
-      .addEventListener("click", () => {
-        this._handleDeleteCard();
-      });
+      .addEventListener("click", this._handleDeleteCard);
 
     this._cardElement
       .querySelector(".elements__image")
-      .addEventListener("click", () => {
-        this._handlePreviewImage();
-      });
+      .addEventListener("click", this._handlePreviewImage);
   }
 
   render() {

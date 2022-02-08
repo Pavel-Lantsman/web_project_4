@@ -8,7 +8,7 @@ const editProfilePopup = document.querySelector(".modal_type_edit-profile");
 const addNewPlacePopup = document.querySelector(".modal_type_add-place");
 
 // wrapper for popup forms
-const profileForm = editProfilePopup.querySelector(".form");
+const profileForm = editProfilePopup.querySelector(".form-profile");
 const placeForm = addNewPlacePopup.querySelector(".form-add-place");
 
 // select profile name and info:
@@ -28,9 +28,7 @@ const addNewPlacePopupButton = document.querySelector(".profile__add-button");
 
 // place - elements - template
 const placesList = document.querySelector(".elements__list");
-const placeTemplate = document.querySelector(".elements-template")
-    .content
-    .querySelector(".elements__element");
+const templateSelector = ".elements__element";
 
 
 initialCards.reverse().forEach((initialCardData) => {
@@ -38,29 +36,32 @@ initialCards.reverse().forEach((initialCardData) => {
 });
 
 function renderCard(data) {
-  const card = new Card(data, placeTemplate);
+  const card = new Card(data, templateSelector);
   placesList.prepend(card.render());
 }
 
-function disableButton(button) {
-  button.disabled = true;
-  button.classList.add("form__button_disabled");
+
+function submitProfileForm(e) {
+  e.preventDefault();
+  userNameElement.textContent = inputName.value;
+  userJobElement.textContent = inputJob.value;
+  closeModal(editProfilePopup);
+  editProfileFormValidator.disableButton(e.submitter);
 }
 
 function submitNewPlaceForm(e) {
   e.preventDefault();
 
-  const insertPlace = {
+  const place = {
     name: inputPlace.value,
     link: inputLink.value,
   };
-  renderCard(insertPlace);
+  renderCard(place);
   closeModal(addNewPlacePopup);
   e.target.reset();
-  disableButton(e.submitter);
+  addCardFormValidator.disableButton(e.submitter);
 }
 
-const formSelector = ".form";
 const fieldset = {
   inputSelector: ".form__input",
   submitButtonSelector: ".form__button",
@@ -69,22 +70,11 @@ const fieldset = {
   errorClass: "form__error_visible",
 };
 
-const getFormsList = Array.from(document.querySelectorAll(formSelector));
+const  addCardFormValidator = new FormValidator(fieldset,placeForm);
+addCardFormValidator.enableValidation();
 
-getFormsList.forEach((formElement) => {
-  const form = new FormValidator(fieldset, formElement);
-
-  form.enableValidation();
-});
-
-function submitProfileForm(e) {
-  e.preventDefault();
-  userNameElement.textContent = inputName.value;
-  userJobElement.textContent = inputJob.value;
-  closeModal(editProfilePopup);
-  disableButton(e.submitter);
-}
-
+const editProfileFormValidator = new FormValidator(fieldset, profileForm);
+editProfileFormValidator.enableValidation();
 
 const closeButtons = document.querySelectorAll(".modal__close-button");
 closeButtons.forEach((button) =>

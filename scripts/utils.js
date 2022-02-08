@@ -18,11 +18,11 @@ export function modalOverlayClickOut(event) {
 export function openModal(popup) {
   popup.classList.add("modal_opened");
   document.addEventListener("keydown", closePopupWithEscape);
-  document.addEventListener("click", modalOverlayClickOut);
+  document.addEventListener("mousedown", modalOverlayClickOut);
 }
 
 export function closeModal(popup) {
   popup.classList.remove("modal_opened");
   document.removeEventListener("keydown", closePopupWithEscape);
-  document.removeEventListener("click", modalOverlayClickOut);
+  document.removeEventListener("mousedown", modalOverlayClickOut);
 }
