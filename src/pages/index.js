@@ -57,7 +57,6 @@ function submitNewPlaceForm(data) {
   const place =  { name: data.place, link: data.link };
 
   renderCard(place);
-  elementsList.addItem(place);
   addPlacePopup.close();
   placeFormValidator.disableSubmitButton();
 }
@@ -79,7 +78,7 @@ function submitProfileForm(data) {
   profileFormValidator.disableSubmitButton();
 }
 
-function currentProfileName() {
+function fillProfileForm() {
   const inputData = userInfo.getUserInfo();
   inputName.value = inputData.name;
   inputJob.value = inputData.job;
@@ -93,7 +92,7 @@ profileFormValidator.enableValidation();
 
 
 openProfileEditButton.addEventListener("click", () => {
-  currentProfileName();
+  fillProfileForm();
   profileModal.open();
 
 });

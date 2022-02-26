@@ -1,13 +1,17 @@
 .modal {
+    display: flex;
+    position: fixed;
     width: 100vw;
     height: 100vh;
-    position: fixed;
     top: 0;
     left: 0;
     justify-content: center;
     align-items: center;
-    display: none;
     background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
 
     animation: fadein .5s;
     -webkit-animation: fadein .5s;
