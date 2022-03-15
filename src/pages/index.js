@@ -100,3 +100,9 @@ openProfileEditButton.addEventListener("click", () => {
 addNewPlacePopupButton.addEventListener("click", () => {
   addPlacePopup.open();
 });
+
+
+
+
+
+
