@@ -17,7 +17,10 @@
     <main class="main">
 
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="profile avatar"/>
+            <div class="profile__avatar">
+                <img class="profile__photo" src="<%=require('./images/avatar.jpg')%>" alt="profile avatar"/>
+                <button type="button" aria-label="edit-avatar" class="profile__photo_edit"></button>
+            </div>
 
             <div class="profile__info">
                 <h1 class="profile__name">Jacques Cousteau</h1>
@@ -38,6 +41,20 @@
         <p class="footer__copyright">© 2021. Around the U.S.</p>
     </footer>
 
+    <div class="modal modal_type_edit-avatar">
+        <div class="modal__container">
+            <button type="button" aria-label="close-button" class="modal__close-button"></button>
+            <h3 class="modal__title">Change profile picture</h3>
+
+            <form action="#" class="form form_type_edit-avatar" name="form-edit-avatar" novalidate>
+                <input id="link-input" type="url" value="" placeholder="enter avatar link here" class="form__input
+                 form__input_avatar-url" name="link" minlength="2" required >
+                <span id="link-input-error" class="form__error form__error_visible"></span>
+                <button type="submit" class="form__button form__button_disabled">Save</button>
+            </form>
+        </div>
+    </div>
+
     <div class="modal modal_type_edit-profile">
         <div class="modal__container">
             <button type="button" aria-label="close-button" class="modal__close-button"></button>
@@ -54,8 +71,6 @@
             </form>
         </div>
     </div>
-
-
 
     <div class="modal modal_type_add-place">
         <div class="modal__container">
@@ -74,8 +89,6 @@
         </div>
     </div>
 
-
-
     <div class="modal modal_type_preview-image">
         <div class="modal__image-wrapper">
             <button type="button" aria-label="close-button"
@@ -87,6 +100,18 @@
         </div>
     </div>
 
+    <div class="modal modal_type_delete">
+        <div class="modal__container">
+            <button type="button" aria-label="close-button" class="modal__close-button"></button>
+            <h3 class="modal__title">Are You Sure?</h3>
+            <form name="confirm" class="form form_type_delete">
+                <button type="submit" class="form__button">Yes</button>
+            </form>
+        </div>
+    </div>
+
+
+
 
 </div>
 
@@ -97,15 +122,12 @@
         <div class="elements__info">
             <h2 class="elements__text"></h2>
             <button class="elements__heart" type="button"></button>
+            <div class="elements__like-counter"></div>
         </div>
     </li>
 </template>
 
-
-
 <script type="module" src="pages/index.js"></script>
-
-
 
 </body>
 </html>

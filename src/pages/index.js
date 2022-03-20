@@ -1,19 +1,23 @@
 import "./index.css";
 
-import initialCards from "../utils/initialCards.js";
+
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 import {
+  initialCards,
   editProfilePopup,
   addNewPlacePopup,
   previewImagePopup,
   placeForm,
   profileForm,
+  avatarForm,
   userNameElement,
   userJobElement,
   inputName,
@@ -23,85 +27,100 @@ import {
   placesList,
   placeTemplate,
   fieldset,
+  userAvatarElement,
+  deleteCard,
+  submitCard,
+  submitInfo,
+  submitAvatar,
+  avatarPopup, userName, userInfo, userAvatar
 } from "../utils/constants.js";
 
+let currentUserInfo = {};
 
-const elementsList = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  placeTemplate
-);
-
-function renderCard(data) {
-  const card = new Card(data, placeTemplate, handleImagePreview);
-  placesList.prepend(card.render());
-}
-
-function handleImagePreview(link, name) {
-  previewImage.open(link, name);
-}
-
-elementsList.renderer();
-
-
-const previewImage = new PopupWithImage(previewImagePopup);
-previewImage.setEventListeners();
-
-
-const addPlacePopup = new PopupWithForm(addNewPlacePopup, submitNewPlaceForm);
-addPlacePopup.setEventListeners();
-
-function submitNewPlaceForm(data) {
-  const place =  { name: data.place, link: data.link };
-
-  renderCard(place);
-  addPlacePopup.close();
-  placeFormValidator.disableSubmitButton();
-}
-
-
-const userInfo = new UserInfo({
-  userNameElement: userNameElement,
-  userJobElement: userJobElement,
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "5204ef9a-1e82-4858-b856-dcc259ab4642",
+    "Content-Type": "application/json"
+  }
 });
 
-const profileModal = new PopupWithForm(editProfilePopup, submitProfileForm);
-profileModal.setEventListeners();
+const pageGallery = new Section({
+    items: [],
+    renderer: (item) => {
+        return createCard({ item });
+    }
+}, placesList);
 
-function submitProfileForm(data) {
-  userInfo.setUserInfo(
-    { inputName: data.name, inputJob: data.job }
-  );
-  profileModal.close();
-  profileFormValidator.disableSubmitButton();
+const userInfoInstance = new UserInfo({
+  userName: userName,
+  userInfo: userInfo},
+    userAvatar);
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([userData, cardData]) => {
+      userInfoInstance.setUserInfo(userData);
+      userInfoInstance.setUserAvatar(userData.avatar);
+      currentUserInfo = userData;
+      pageGallery.renderItems(cardData);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+function createCard({ item }) {
+    const card = new Card({
+            item,
+            handleCardClick: ({ name, link }) => {
+                popupImage.open({ name, link });
+            }
+        },
+        placeTemplate,
+        handleDeleteClick, handleLikeClick);
+    const cardElement = card.generateCard(currentUserInfo);
+    return cardElement;
 }
 
-function fillProfileForm() {
-  const inputData = userInfo.getUserInfo();
-  inputName.value = inputData.name;
-  inputJob.value = inputData.job;
+function handleLikeClick(data, isLiked) {
+    if (isLiked) {
+        api.likeDelete(data)
+            .then((res) => {
+                data.updateLike(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    } else {
+        api.likeAdd(data)
+            .then((res) => {
+                data.updateLike(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 }
 
-const placeFormValidator = new FormValidator(fieldset, placeForm);
-placeFormValidator.enableValidation();
 
-const profileFormValidator = new FormValidator(fieldset, profileForm);
-profileFormValidator.enableValidation();
+function handleDeleteClick(data) {
+    deletePopup.openWithData(data);
+}
 
+function handleDeleteCardFormSubmit(data) {
+    api.deleteCard(data).then((res) => {
+        data.removeCard();
+        deletePopup.close('Yes');
+    })
+        .catch((err) => {
+            console.log(err);
+        })
+}
 
-openProfileEditButton.addEventListener("click", () => {
-  fillProfileForm();
-  profileModal.open();
+const popupImage = new PopupWithImage('.popup_type_image');
+popupImage.setEventListeners();
 
-});
-
-addNewPlacePopupButton.addEventListener("click", () => {
-  addPlacePopup.open();
-});
-
-
+const deletePopup = new PopupWithForm('.popup_type_delete', handleDeleteCardFormSubmit);
+deletePopup.setEventListeners();
 
 
 
