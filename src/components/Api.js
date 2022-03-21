@@ -7,39 +7,39 @@ export default class Api {
         this._name = item.name;
         this._link = item.link;
         return fetch(`${this._baseUrl}/cards`, {
-            method: "POST",
-            headers: this._headers,
-            body: JSON.stringify({
-                name: this._name,
-                link: this._link
+                method: "POST",
+                headers: this._headers,
+                body: JSON.stringify({
+                    name: this._name,
+                    link: this._link
+                })
             })
-        })
             .then(this._checkResponce);
     }
     setUserInfo({ name, about, avatar }) {
         return fetch(`${this._baseUrl}/users/me`, {
-            method: "PATCH",
-            headers: this._headers,
-            body: JSON.stringify({
-                name,
-                about,
-                avatar
+                method: "PATCH",
+                headers: this._headers,
+                body: JSON.stringify({
+                    name,
+                    about,
+                    avatar
+                })
             })
-        })
             .then(this._checkResponce);
     }
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
-            method: "GET",
-            headers: this._headers
-        })
+                method: "GET",
+                headers: this._headers
+            })
             .then(this._checkResponce);
     }
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
-            method: "GET",
-            headers: this._headers
-        })
+                method: "GET",
+                headers: this._headers
+            })
             .then(this._checkResponce);
     }
     deleteCard(data) {
@@ -76,4 +76,3 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
     }
 }
-  

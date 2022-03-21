@@ -1,53 +1,41 @@
-// wrapper modals
-export const editProfilePopup = document.querySelector(".modal_type_edit-profile");
-export const addNewPlacePopup = document.querySelector(".modal_type_add-place");
-export const previewImagePopup = document.querySelector(".modal_type_preview-image");
-export const avatarPopup = document.querySelector(".modal_type_edit-avatar");
 
-// wrapper forms
-export const placeForm = document.querySelector(".form-add-place");
-export const profileForm = document.querySelector(".form-profile");
-export const avatarForm = document.querySelector(".form_type_edit-avatar");
-
-
-
-// profile name,info, avatar:
-export const userName = document.querySelector(".profile__name");
-export const userInfo = document.querySelector(".profile__title");
-export const userAvatar = document.querySelector(".profile__avatar");
-
-
-// input data fields in forms
-export const inputName = document.querySelector(".form__input_type_name");
-export const inputJob = document.querySelector(".form__input_type_job");
-
-// buttons
-export const openProfileEditButton = document.querySelector(".profile__edit-button");
-export const addNewPlacePopupButton = document.querySelector(".profile__add-button");
-export const submitCard = placeForm.querySelector(".form__button");
-export const submitInfo = profileForm.querySelector(".form__button");
-export const submitAvatar = avatarForm.querySelector(".form__button");
-
-
-
-// place - elements - template
-export const placesList = document.querySelector(".elements__list");
-export const placeTemplate = document.querySelector(".elements-template").content;
-
-
-const imageModal = document.querySelector('.modal_type_image');
-export const deleteCard = document.querySelector(".modal_type_delete");
-
-
-export const fieldset = {
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: "form__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
+export const pageSettings = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__error_active"
 };
 
-export const initialCards = [];
+//popup
+export const popupProfile = document.querySelector('.popup_type_profile');
+export const popupAddCard = document.querySelector('.popup_type_addCard');
+export const popupPreviewImage = document.querySelector('.popup_type_image');
+export const popupDelete = document.querySelector('.popup_type_delete');
+export const popupAvatar = document.querySelector('.popup_type_avatar');
 
+//popup forms
+export const editForm = document.querySelector('.popup__form-profile');
+export const addCardForm = document.querySelector('.popup__form-addCard');
+export const avatarForm = document.querySelector('.popup__form-avatar');
 
+//input data fields in forms
+export const inputName = document.querySelector('.popup__input_value_name');
+export const inputInfo = document.querySelector('.popup__input_value_about');
 
+//card template
+export const cardTemplate = document.querySelector(".card-template").content;
+
+//buttons
+export const editButton = document.querySelector('.user__edit-button');
+export const addCardButton = document.querySelector('.user__add-button');
+export const userAvatarButton = document.querySelector('.user__avatar-wrapper');
+
+//user data
+export const userName = document.querySelector('.user__name');
+export const userInfo = document.querySelector('.user__info');
+export const userAvatar = document.querySelector('.user__avatar');
+
+//card gallery
+export const cardGallery = document.querySelector('.gallery');
