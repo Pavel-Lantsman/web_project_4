@@ -15,10 +15,11 @@ export const popupPreviewImage = document.querySelector('.popup_type_image');
 export const popupDelete = document.querySelector('.popup_type_delete');
 export const popupAvatar = document.querySelector('.popup_type_avatar');
 
-//popup forms
+// popup forms
 export const editForm = document.querySelector('.popup__form-profile');
 export const addCardForm = document.querySelector('.popup__form-addCard');
 export const avatarForm = document.querySelector('.popup__form-avatar');
+
 
 //input data fields in forms
 export const inputName = document.querySelector('.popup__input_value_name');

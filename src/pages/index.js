@@ -53,7 +53,6 @@ const userInfoInstance = new UserInfo({ userName: userName, userInfo: userInfo }
 Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userData, cardData]) => {
         userInfoInstance.setUserInfo(userData);
-        userInfoInstance.setUserAvatar(userData.avatar);
         currentUserInfo = userData;
         pageGallery.renderItems(cardData);
     })
@@ -78,7 +77,7 @@ function createCard({ item }) {
 function handleAvatarFormSubmit() {
     const data = popupForAvatar.getInputValues();
     api.editProfilePhoto(data.avatar).then(() => {
-            userInfoInstance.setUserAvatar(data.avatar);
+            userInfoInstance.setUserInfo(data.avatar);
             popupForAvatar.close();
         })
         .catch((err) => {
@@ -162,7 +161,7 @@ const popupForAvatar = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
 popupForAvatar.setEventListeners();
 
 
-//validators
+// validators
 const popupAddCardValid = new FormValidator(pageSettings, addCardForm);
 popupAddCardValid.enableValidation();
 
@@ -171,6 +170,7 @@ popupProfileValid.enableValidation();
 
 const avatarPopupValid = new FormValidator(pageSettings, avatarForm);
 avatarPopupValid.enableValidation();
+
 
 //event listeners
 editButton.addEventListener('click', () => {

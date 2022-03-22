@@ -1,6 +1,6 @@
 export default class Card {
-    constructor({ item, handleCardClick }, templateSelector, handleDeleteClick, handleLikeClick) {
-        this._templateSelector = templateSelector;
+    constructor({ item, handleCardClick }, templateElement, handleDeleteClick, handleLikeClick) {
+        this._templateElement = templateElement;
         this._name = item.name;
         this._link = item.link;
         this._likes = item.likes;
@@ -9,8 +9,8 @@ export default class Card {
         this._handleCardClick = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
-        this._item = item;
     }
+
     _countLike() {
         if (this._likes.length < 1) {
             this._likeCounter.textContent = "";
@@ -18,30 +18,35 @@ export default class Card {
             this._likeCounter.textContent = this._likes.length;
         }
     }
+
     updateLike(res) {
         this._likeCounter.textContent = res.likes.length;
         this._likeButton.classList.toggle('gallery__like-button_active');
-        if (this._likeCounter.textContent == 0) {
+        if (this._likeCounter.textContent === 0) {
             this._likeCounter.textContent = "";
         }
     }
+
     _checkInitialLike(data) {
-        if (this._likes.some(item => item._id == data._id)) {
+        if (this._likes.some(item => item._id === data._id)) {
             this._likeButton.classList.add('gallery__like-button_active');
         }
     }
+
     _compareID(data) {
         this._deleteButton = this._element.querySelector('.gallery__delete-button');
         if (this._ownerId !== data._id) {
             this._deleteButton.style.display = 'none';
         }
     }
+
     _getTemplate() {
-        this._element = this._templateSelector
+        this._element = this._templateElement
             .querySelector('.gallery__card')
             .cloneNode(true);
         return this._element;
     }
+
     _setEventListeners() {
         this._likeButton.addEventListener('click', () => {
             const isLiked = this._likeButton.classList.contains('gallery__like-button_active');
@@ -55,9 +60,11 @@ export default class Card {
             link: this._link
         }));
     }
+
     removeCard() {
         this._element.remove();
     }
+
     generateCard(data) {
         this._element = this._getTemplate();
         this._likeButton = this._element.querySelector('.gallery__like-button');

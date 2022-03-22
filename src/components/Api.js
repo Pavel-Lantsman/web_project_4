@@ -3,6 +3,7 @@ export default class Api {
         this._baseUrl = options.baseUrl;
         this._headers = options.headers;
     }
+
     sendCardData(item) {
         this._name = item.name;
         this._link = item.link;
@@ -16,6 +17,7 @@ export default class Api {
             })
             .then(this._checkResponce);
     }
+
     setUserInfo({ name, about, avatar }) {
         return fetch(`${this._baseUrl}/users/me`, {
                 method: "PATCH",
@@ -28,6 +30,7 @@ export default class Api {
             })
             .then(this._checkResponce);
     }
+
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
                 method: "GET",
@@ -35,6 +38,7 @@ export default class Api {
             })
             .then(this._checkResponce);
     }
+
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
                 method: "GET",
@@ -42,24 +46,28 @@ export default class Api {
             })
             .then(this._checkResponce);
     }
+
     deleteCard(data) {
         return fetch(`${this._baseUrl}/cards/${data._id}`, {
             method: "DELETE",
             headers: this._headers,
         }).then(this._checkResponce);
     }
+
     likeAdd(data) {
         return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
             method: "PUT",
             headers: this._headers,
         }).then(this._checkResponce);
     }
+
     likeDelete(data) {
         return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
             method: "DELETE",
             headers: this._headers,
         }).then(this._checkResponce);
     }
+
     editProfilePhoto(data) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: "PATCH",
@@ -69,6 +77,7 @@ export default class Api {
             })
         }).then(this._checkResponce);
     }
+
     _checkResponce(res) {
         if (res.ok) {
             return res.json();
