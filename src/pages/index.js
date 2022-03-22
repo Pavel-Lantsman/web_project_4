@@ -76,8 +76,8 @@ function createCard({ item }) {
 
 function handleAvatarFormSubmit() {
     const data = popupForAvatar.getInputValues();
-    api.editProfilePhoto(data.avatar).then(() => {
-            userInfoInstance.setUserInfo(data.avatar);
+    api.editProfilePhoto(data.avatar).then((res) => {
+            userInfoInstance.setUserInfo(res);
             popupForAvatar.close();
         })
         .catch((err) => {
